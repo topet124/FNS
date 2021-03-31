@@ -21,7 +21,8 @@ def search(request):
             #initiating searching 
     if 'searched' in request.GET:
         searched = request.GET.get('searched')
-        products = Product.objects.all().filter(name = searched)
+         #filters and search by related strings to the products
+        products = Product.objects.all().filter(name__icontains=searched)
         return render(request, 'search.html', {'searched':searched, 
                                                'products': products,
                                               'cartItems': cartItems })
